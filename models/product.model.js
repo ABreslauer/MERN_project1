@@ -16,8 +16,7 @@ const productSchema = new Schema({
     name: String,
     description: String,
     price: Number,
-    currentInventory: Number,
-    warehouse: String,
+    currentInventory: Number
 })
 
 const product = mongoose.model('Product', productSchema, 'Product');

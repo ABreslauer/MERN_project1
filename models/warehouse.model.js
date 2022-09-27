@@ -11,8 +11,15 @@ const Schema = mongoose.Schema;
 
 const warehouseSchema = new Schema({
     name: String,
-    currentInventory: Number,
-    maxInventory: Number
+    address: String,
+    maxInventory: Number, 
+    inventory: {
+        type: [{
+            type:mongoose.Types.ObjectId,
+            ref: 'Product'
+        }],
+        validate: [products => products.length <= maxInventory, 'Cannot store more than 1000 products in a warehouse.']
+    }
 });
 
 const warehouse = mongoose.model('Warehouse', warehouseSchema, 'Warehouse');

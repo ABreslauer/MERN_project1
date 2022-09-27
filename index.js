@@ -7,11 +7,8 @@ const app = express();
 app.use(express.json());
 app.use(cors);
 
-const warehouseRouter = require('./routes/warehouse.route.js');
-const productRouter = require('./routes/product.router.js');
-
-app.use('/warehouse', warehouseRouter);
-app.use('/product', productRouter);
+app.use('/product', require('./routes/product.router.js'));
+app.use('/warehouse', require('./routes/warehouse.route.js'));
 
 const connectToMongo = async () => {
     try {
