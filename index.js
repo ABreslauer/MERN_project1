@@ -5,7 +5,6 @@ require('dotenv').config();
 
 const app = express();
 app.use(express.json());
-app.use(cors);
 
 app.use('/product', require('./routes/product.router.js'));
 app.use('/warehouse', require('./routes/warehouse.route.js'));
