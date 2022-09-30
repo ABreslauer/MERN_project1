@@ -4,10 +4,13 @@ const cors = require("cors");
 require('dotenv').config();
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
-app.use('/product', require('./routes/product.router.js'));
-app.use('/warehouse', require('./routes/warehouse.route.js'));
+
+// Routes
+app.use('/book', require('./routes/book.route'));
+app.use('/warehouse', require('./routes/warehouse.route'));
 
 const connectToMongo = async () => {
     try {

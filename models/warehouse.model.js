@@ -1,13 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-/**
- * What properties should a warehouse have?
- * 
- * Name: string
- * Current Inventory: number
- * Max Capacity: number
- */
+const defaultMaxInventory = 1000;
 
 const warehouseSchema = new Schema({
     name: String,
@@ -16,12 +10,11 @@ const warehouseSchema = new Schema({
     inventory: {
         type: [{
             type:mongoose.Types.ObjectId,
-            ref: 'Product'
-        }],
-        validate: [products => products.length <= maxInventory, 'Cannot store more than 1000 products in a warehouse.']
+            ref: 'Book'
+        }]
     }
 });
 
-const warehouse = mongoose.model('Warehouse', warehouseSchema, 'Warehouse');
+const Warehouse = mongoose.model('Warehouse', warehouseSchema);
 
-module.exports = warehouse;
+module.exports = Warehouse;

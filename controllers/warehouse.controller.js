@@ -1,4 +1,3 @@
-// Make all queries in this file
 const Warehouse = require('../models/warehouse.model.js');
 
 const findAllWarehouses = async () => {
@@ -18,8 +17,27 @@ const findWarehouseById = async id => {
     }
 }
 
-// Add new warehouse - POST
-// Update warehouse inventory - PUT
-// Delete warehouse - DELETE
+const createWarehouse = async warehouseToSave => {
+    try {
+        const warehouse = new Warehouse(warehouseToSave);
+        await warehouse.save();
+        return warehouse;
+    } catch (err) {
+        throw {status: 500, msg: err.message};
+    }
+}
 
-module.exports = { findAllWarehouses, findWarehouseById };
+const updateWarehouse = async (id, warehouseToUpdate) => {
+    try {
+        const warehouse = await Warehouse.findByIdAndUpdate(id, warehouseToUpdate);
+        if (warehouse == null) {
+            throw {status: 204, msg: `No warehouse with the ID of ${id} was found.`};
+        }
+    } catch (err) {
+        throw {status: 400, msg: err};
+    }
+}
+
+const deleteWarehouse = async (id) => await Warehouse.findByIdAndDelete(id);
+
+module.exports = { findAllWarehouses, findWarehouseById, createWarehouse, updateWarehouse, deleteWarehouse };
