@@ -16,7 +16,7 @@ router.get('/', async (req,res) => {
     res.json(books);
 })
 
-router.get('/:id', validateObjectId, async(req,res) => {
+router.get('/:id', validateObjectId, async (req,res) => {
     try {
         const book = await findBookById(req.params.id);
         res.json(book);
@@ -27,7 +27,6 @@ router.get('/:id', validateObjectId, async(req,res) => {
 
 router.post('/', async (req,res) => {
     try {
-        console.log(req.body);
         const book = await createBook(req.body);
         res.status(201).json(book);
     } catch (err) {
@@ -46,7 +45,7 @@ router.put('/:id', validateObjectId, async (req, res) => {
 
 router.delete('/:id', validateObjectId, async (req, res) => {
     try {
-        await deleteBook(id);
+        await deleteBook(req.params.id);
         res.send();
     } catch (err) {
         res.status(err?.status ?? 500).json(err);

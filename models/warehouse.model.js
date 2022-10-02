@@ -1,16 +1,20 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const defaultMaxInventory = 1000;
-
 const warehouseSchema = new Schema({
-    name: String,
+    name: {
+        type: String,
+        required: true
+    },
     address: String,
-    maxInventory: Number, 
+    maxInventory: {
+        type: Number, 
+        required: true
+    },
     inventory: {
         type: [{
-            type:mongoose.Types.ObjectId,
-            ref: 'Book'
+            type: mongoose.Types.ObjectId,
+            ref: 'Book',
         }]
     }
 });

@@ -2,22 +2,19 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const bookSchema = new Schema({
-    title: String,
+    title: {
+        type: String,
+        required: true
+    },
     description: String,
     author: String,
     wordCount: Number,
     releaseDate: Date,
-    price: Number,
-    currentInventory: {
+    price: {
         type: Number,
-        validate: [num => num >= 0, 'Cannot have negative books stored']
-    },
-    imageURL: String,
-    warehouseId: {
-        type: mongoose.Types.ObjectId,
-        ref: 'Warehouse',
         required: true
-    }
+    },
+    imageURL: String
 })
 
 const Book = mongoose.model('Book', bookSchema);
