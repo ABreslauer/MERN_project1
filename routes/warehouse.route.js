@@ -72,7 +72,7 @@ router.put('/:id/removeBook/:bookid', validateObjectId, async (req, res) => {
 // Delete a warehouse
 router.delete('/:id', validateObjectId, async (req, res) => {
     try {
-        await deleteWarehouse(id);
+        await deleteWarehouse(req.params.id);
         res.send();
     } catch (err) {
         res.status(err?.status ?? 500).json(err);
